@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@800&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <title>Frontend Mentor | Advice generator app</title>
+</head>
+
+<script>
+
+  async function fetchAdvice() {
+    let url = 'https://api.adviceslip.com/advice';
+    try{
+      let res = await fetch(url);
+      return await res.json();
+    } catch(error){
+      console.log(error);
+    }
+  }
+
+  async function getAdvice() {
+    let msg = await fetchAdvice();
+    let id = msg.slip.id;
+    let advice = msg.slip.advice;
+    
+    let id_html = `advice #${id}`
+    let html = `“${advice}”`;
+    
+    let id_container = document.querySelector(".advice-id");
+    let container = document.querySelector(".advice-text");
+    id_container.innerHTML = id_html;
+    container.innerHTML = html;
+  }
+
+  window.onload = getAdvice;
+</script>
+
+<body>
+
+  <main>
+    <section class="advice-card">
+      <h1 class="advice-id">Advice # </h1>
+      <p class="advice-text">"Advice Text goes here"</p>
+      <!-- <picture class="advice-img">
+        <source srcset="images/pattern-divider-desktop.svg" media="(min-width: 600px)" />
+        <img src="images/pattern-divider-mobile.svg" />
+      </picture> -->
+      <img class="advice-img" src="images/pattern-divider-mobile.svg" alt="">
+      <button class="button" onclick="getAdvice()"><img class="dice" src="images/icon-dice.svg"></button>
+
+    </section>
+  </main>
+
+  
+  <!-- <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="#">jmjules</a>.
+  </div> -->
+</body>
+</html>
