@@ -12,48 +12,22 @@
   <title>Frontend Mentor | Advice generator app</title>
 </head>
 
-<script>
-
-  async function fetchAdvice() {
-    let url = 'https://api.adviceslip.com/advice';
-    try{
-      let res = await fetch(url);
-      return await res.json();
-    } catch(error){
-      console.log(error);
-    }
-  }
-
-  async function getAdvice() {
-    let msg = await fetchAdvice();
-    let id = msg.slip.id;
-    let advice = msg.slip.advice;
-    
-    let id_html = `advice #${id}`
-    let html = `“${advice}”`;
-    
-    let id_container = document.querySelector(".advice-id");
-    let container = document.querySelector(".advice-text");
-    id_container.innerHTML = id_html;
-    container.innerHTML = html;
-  }
-
-  window.onload = getAdvice;
-</script>
+<script src="script.js"></script>
 
 <body>
 
   <main>
     <section class="advice-card">
-      <h1 class="advice-id">Advice # </h1>
-      <p class="advice-text">"Advice Text goes here"</p>
-      <!-- <picture class="advice-img">
-        <source srcset="images/pattern-divider-desktop.svg" media="(min-width: 600px)" />
-        <img src="images/pattern-divider-mobile.svg" />
-      </picture> -->
-      <img class="advice-img" src="images/pattern-divider-mobile.svg" alt="">
-      <button class="button" onclick="getAdvice()"><img class="dice" src="images/icon-dice.svg"></button>
+      <h1 class="advice-id"></h1>
+      <p class="fillme"></p>
 
+      <picture class="advice-img">
+        <source srcset="images/pattern-divider-desktop.svg" media="(min-width: 550px)" />
+        <img src="images/pattern-divider-mobile.svg" />
+      </picture>
+
+      <button class="button" onclick="getAdvice()"><img class="dice" src="images/icon-dice.svg"></button>
+      
     </section>
   </main>
 
